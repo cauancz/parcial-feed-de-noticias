@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+<?php
+include_once('config/database.php')
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,24 +23,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b">
-                        <td class="py-2 px-4"><img class="w-20 h-20 object-cover" src="https://via.placeholder.com/150" alt="Notícia 1"></td>
-                        <td class="py-2 px-4 text-sm text-gray-700">Título da Notícia 1</td>
-                        <td class="py-2 px-4 text-sm text-gray-700">Descrição breve da notícia 1.</td>
-                        <td class="py-2 px-4 text-sm text-gray-700">22/05/2024</td>
-                    </tr>
+                  <?php  
+                    $rs = $con->query("SELECT * FROM noticias");
+                    while ($row = $rs->fetch(PDO::FETCH_OBJ)) {
+
+
+                    echo '
                     <tr class="border-b bg-gray-50">
-                        <td class="py-2 px-4"><img class="w-20 h-20 object-cover" src="https://via.placeholder.com/150" alt="Notícia 2"></td>
-                        <td class="py-2 px-4 text-sm text-gray-700">Título da Notícia 2</td>
-                        <td class="py-2 px-4 text-sm text-gray-700">Descrição breve da notícia 2.</td>
-                        <td class="py-2 px-4 text-sm text-gray-700">21/05/2024</td>
+                        <td class="py-2 px-4"><img class="w-20 h-20 object-cover" src="'. $row->imagem .'" alt="Notícia 2"></td>
+                        <td class="py-2 px-4 text-sm text-gray-700">'. $row->titulo .'</td>
+                        <td class="py-2 px-4 text-sm text-gray-700">'. $row->descricao.'</td>
+                        <td class="py-2 px-4 text-sm text-gray-700">'. $row->data .'</td>
                     </tr>
-                    <tr class="border-b">
-                        <td class="py-2 px-4"><img class="w-20 h-20 object-cover" src="https://via.placeholder.com/150" alt="Notícia 3"></td>
-                        <td class="py-2 px-4 text-sm text-gray-700">Título da Notícia 3</td>
-                        <td class="py-2 px-4 text-sm text-gray-700">Descrição breve da notícia 3.</td>
-                        <td class="py-2 px-4 text-sm text-gray-700">20/05/2024</td>
-                    </tr>
+                    ';
+                    }
+?>
                     <!-- Adicione mais linhas conforme necessário -->
                 </tbody>
             </table>
